@@ -66,28 +66,6 @@
 struct pseudo_dev **pseudo_file = NULL;
 int pseudo_count = 0;
 
-static void dump_pseudo(struct pseudo *pseudo, char *string)
-{
-	int i;
-	char path[1024];
-
-	for(i = 0; i < pseudo->names; i++) {
-		struct pseudo_entry *entry = &pseudo->name[i];
-		if(string)
-			strcat(strcat(strcpy(path, string), "/"), entry->name);
-		else
-			strcpy(path, entry->name);
-		if(entry->pseudo == NULL)
-			ERROR("%s %c %o %d %d %d %d\n", path, entry->dev->type,
-				entry->dev->mode, entry->dev->uid,
-				entry->dev->gid, entry->dev->major,
-				entry->dev->minor);
-		else
-			dump_pseudo(entry->pseudo, path);
-	}
-}
-
-
 static char *get_component(char *target, char *targname)
 {
 	while(*target == '/')
