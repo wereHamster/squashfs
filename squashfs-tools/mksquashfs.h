@@ -90,3 +90,8 @@ struct inode_info {
 /* offset of data in compressed metadata blocks (allowing room for
  * compressed size */
 #define BLOCK_OFFSET 2
+
+/* Mac OS X support */
+#ifndef FNM_EXTMATCH
+#define FNM_EXTMATCH 0
+#endif

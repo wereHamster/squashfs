@@ -30,8 +30,11 @@
 #include "compressor.h"
 #include "xattr.h"
 
+#ifndef __APPLE__
 #include <sys/sysinfo.h>
+#endif
 #include <sys/types.h>
+#include <sys/sysctl.h>
 
 struct cache *fragment_cache, *data_cache;
 struct queue *to_reader, *to_deflate, *to_writer, *from_writer;

@@ -55,6 +55,24 @@
 			fprintf(stderr, s, ## args); \
 		} while(0)
 
+#ifdef __APPLE__
+ssize_t lgetxattr(const char *path, const char *name, void *value, size_t size)
+{
+    return getxattr(path, name, value, size, 0, XATTR_NOFOLLOW);
+}
+
+ssize_t llistxattr(const char *path, char *list, size_t size)
+{
+    return listxattr(path, list, size, XATTR_NOFOLLOW);
+}
+
+int lsetxattr(const char *path, const char *name, const void *value, size_t size, int flags)
+{
+    return setxattr(path, name, value, size, flags, XATTR_NOFOLLOW);
+}
+#endif
+
+
 /* compressed xattr table */
 static char *xattr_table = NULL;
 static unsigned int xattr_size = 0;

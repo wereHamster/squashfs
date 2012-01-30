@@ -27,6 +27,13 @@
 
 #include <sys/xattr.h>
 
+#ifdef __APPLE__
+int lsetxattr(const char *path, const char *name, const void *value, size_t size, int flags)
+{
+    return setxattr(path, name, value, size, flags, XATTR_NOFOLLOW);
+}
+#endif
+
 extern int root_process;
 
 void write_xattr(char *pathname, unsigned int xattr)

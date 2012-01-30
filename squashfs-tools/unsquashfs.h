@@ -295,3 +295,8 @@ extern struct inode *read_inode_4(unsigned int, unsigned int);
 extern struct dir *squashfs_opendir_4(unsigned int, unsigned int,
 	struct inode **);
 extern int read_uids_guids_4();
+
+/* Mac OS X support */
+#ifndef FNM_EXTMATCH
+#define FNM_EXTMATCH 0
+#endif
