@@ -721,13 +721,13 @@ void cache_block_put(struct file_buffer *entry)
 			+ (((char *)A) - data_cache)))
 
 
-inline void inc_progress_bar()
+static inline void inc_progress_bar()
 {
 	cur_uncompressed ++;
 }
 
 
-inline void update_progress_bar()
+static inline void update_progress_bar()
 {
 	pthread_mutex_lock(&progress_mutex);
 	pthread_cond_signal(&progress_wait);
@@ -735,7 +735,7 @@ inline void update_progress_bar()
 }
 
 
-inline void waitforthread(int i)
+static inline void waitforthread(int i)
 {
 	TRACE("Waiting for thread %d\n", i);
 	while(thread[i] != 0)
@@ -2281,7 +2281,7 @@ struct file_info *duplicate(long long file_size, long long bytes,
 }
 
 
-inline int is_fragment(struct inode_info *inode)
+static inline int is_fragment(struct inode_info *inode)
 {
 	int file_size = inode->buf.st_size;
 
@@ -3389,7 +3389,7 @@ struct inode_info *lookup_inode(struct stat *buf)
 }
 
 
-inline void add_dir_entry(char *name, char *pathname, struct dir_info *sub_dir,
+static inline void add_dir_entry(char *name, char *pathname, struct dir_info *sub_dir,
 	struct inode_info *inode_info, struct dir_info *dir)
 {
 	if((dir->count % DIR_ENTRIES) == 0) {
@@ -3415,7 +3415,7 @@ inline void add_dir_entry(char *name, char *pathname, struct dir_info *sub_dir,
 }
 
 
-inline void add_excluded(struct dir_info *dir)
+static inline void add_excluded(struct dir_info *dir)
 {
 	dir->excluded ++;
 }
